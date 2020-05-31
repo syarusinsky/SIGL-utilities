@@ -68,17 +68,17 @@ for byte in file_header:
 byte_val = 0 # the value of the byte to write to the file
 byte_num = 0 # the actual byte to write the bit to
 byte_accumulator = 0
-for column in range(0, bitmap_height):
-    for row in range(0, bitmap_width):
+for row in range(0, bitmap_height):
+    for pixel in range(0, bitmap_width):
         num_to_bitshift = 7 - byte_accumulator
 
-        if file_bitmap[(row * 5) + column] == True:
+        if file_bitmap[(pixel * bitmap_height) + row] == True:
             byte_val = byte_val | (1 << num_to_bitshift)
 
         byte_accumulator = byte_accumulator + 1
         if byte_accumulator >= 8:
-            for pixel in range(0, 8):
-                print( "PIXEL NUM: {} = {}     BYTE NUM: {}".format((byte_num * 8) + pixel, (byte_val >> (7 - pixel)) & 1, byte_num) )
+            for bit in range(0, 8):
+                print( "PIXEL NUM: {} = {}     BYTE NUM: {}".format((byte_num * 8) + bit, (byte_val >> (7 - bit)) & 1, byte_num) )
             font_file.write( bytes([byte_val]) )
             byte_val = 0
             byte_num = byte_num + 1
