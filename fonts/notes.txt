@@ -94,4 +94,3 @@ MAXIMUM CHARACTERS FOR FONT:
 93. /
 94. ?
 95. (space)
-96. (tab)
