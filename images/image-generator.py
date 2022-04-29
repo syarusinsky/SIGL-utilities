@@ -74,8 +74,8 @@ for row in range(0, bitmap_height):
 
             byte_accumulator = byte_accumulator + 1
             if byte_accumulator >= 8:
-                for pixel in range(0, 8):
-                    print( "PIXEL NUM: {} = {}     BYTE NUM: {}     BYTE VAL: {}".format((byte_num * 8) + pixel, (byte_val >> (7 - pixel)) & 1, byte_num, byte_val) )
+                # for pixel in range(0, 8):
+                #     print( "PIXEL NUM: {} = {}     BYTE NUM: {}     BYTE VAL: {}".format((byte_num * 8) + pixel, (byte_val >> (7 - pixel)) & 1, byte_num, byte_val) )
                 output_file.write( bytes([byte_val]) )
                 byte_val = 0
                 byte_num = byte_num + 1
@@ -85,11 +85,12 @@ for row in range(0, bitmap_height):
             output_file.write( bytes([pixel_vals[1]]) ) # g
             output_file.write( bytes([pixel_vals[2]]) ) # b
             output_file.write( bytes([pixel_vals[3]]) ) # a
-            print( pixel_vals[3] )
+            print( str(pixel_vals[0]) + ", " + str(pixel_vals[1]) + ", "  + str(pixel_vals[2]) + ", " + str(pixel_vals[3]) );
         elif bitmap_format == 0: # bitmap format is rgb
             output_file.write( bytes([pixel_vals[0]]) ) # r
             output_file.write( bytes([pixel_vals[1]]) ) # g
             output_file.write( bytes([pixel_vals[2]]) ) # b
+            # print( str(pixel_vals[0]) + ", " + str(pixel_vals[1]) + ", "  + str(pixel_vals[2]) );
 
 # if the bitmap format is monochrome and there are remaining bits, write them to the file in a last byte
 if bitmap_format == 2 and byte_accumulator > 0:
